@@ -11,23 +11,47 @@
 #include <ngx_http.h>
 #include <nginx.h>
 
+#if (nginx_version <= 1011001)
 #if (NGX_HAVE_OPENSSL_MD5_H)
 #include <openssl/md5.h>
 #else
 #include <md5.h>
 #endif
+#else
+#if (NGX_OPENSSL)
+#include <openssl/md5.h>
+#else
+#include <md5.h>
+#endif
+#endif
 
+#if (nginx_version <= 1011001)
 #if (NGX_HAVE_OPENSSL_SHA1_H)
 #include <openssl/sha.h>
 #else
 #include <sha.h>
 #endif
+#else
+#if (NGX_OPENSSL)
+#include <openssl/sha.h>
+#else
+#include <sha.h>
+#endif
+#endif
 
 
+#if (nginx_version <= 1011001)
 #if (NGX_OPENSSL_MD5)
 #define  MD5Init    MD5_Init
 #define  MD5Update  MD5_Update
 #define  MD5Final   MD5_Final
+#endif
+#else
+#if (NGX_OPENSSL)
+#define  MD5Init    MD5_Init
+#define  MD5Update  MD5_Update
+#define  MD5Final   MD5_Final
+#endif
 #endif
 
 #define MULTIPART_FORM_DATA_STRING              "multipart/form-data"
