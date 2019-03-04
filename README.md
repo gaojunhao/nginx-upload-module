@@ -5,9 +5,11 @@ This module is based on Nginx upload module (v 2.2.0) http://www.grid.net.ru/ngi
 Since it seems the author has not maintained that module. I changed some codes that can be installed with latest nginx.
 
 - note
+
 When compiled with nginx-1.11.2 and later versions, if https is needed, please add configuration option `--with-http_ssl_module`.
 
 - install
+
 ./configure --add-module={module_dir} && make && make install
 
 - conf
