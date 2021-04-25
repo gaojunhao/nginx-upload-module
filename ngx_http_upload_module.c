@@ -963,7 +963,12 @@ ngx_http_read_upload_client_request_body(ngx_http_request_t *r)
     r->read_event_handler = ngx_http_read_upload_client_request_body_handler;
     r->write_event_handler = ngx_http_request_empty_handler;
 
+    clock_t start, end;
+    start = clock();
+    ngx_log_error(NGX_LOG_EMERG, r->connection->log, 0,"junhao read start: elapsed start: %8.7f", start / CLOCKS_PER_SEC);
     rc = ngx_http_do_read_client_request_body(r);
+    end = clock();
+    ngx_log_error(NGX_LOG_EMERG, r->connection->log, 0,"junhao read end: elapsed: %8.7f", ((double) (end - start)) / CLOCKS_PER_SEC);
 
 done:
 
